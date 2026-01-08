@@ -1,4 +1,3 @@
-// app/product/[id]/page.tsx
 import { getProductById } from "@/app/utils/get-product-by-id";
 import ProductDetailCard from "@/app/components/ProductDetailCard";
 
@@ -7,8 +6,7 @@ export default async function ProductDetail({
 }: {
   params: { id: string };
 }) {
-  const {id}= await params;
-  const product = await getProductById(id);
+  const product = await getProductById(params.id);
 
   if (!product) {
     return (

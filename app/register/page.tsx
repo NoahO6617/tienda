@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { CreateUser } from "@/app/types/user";
 
 export default function RegisterPage() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<CreateUser>({
     name: "",
     email: "",
     password: "",
@@ -13,9 +14,15 @@ export default function RegisterPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    localStorage.setItem("user", JSON.stringify(form));
+
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+
     alert("Cuenta creada correctamente ✅");
   };
 
