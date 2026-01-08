@@ -11,4 +11,3 @@ export async function getProducts(): Promise<Product[]> {
 
   return res.json();
 }
- 
