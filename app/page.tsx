@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { getProducts } from "./utils/get-products";
 import ProductCard from "./components/ProductCard";
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const products = await getProducts();
