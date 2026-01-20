@@ -26,9 +26,9 @@ export default function RegisterPage() {
 
       if (!res.ok) throw new Error();
 
-      alert("Cuenta creada correctamente ✅");
+      alert("Cuenta creada correctamente ");
     } catch {
-      alert("Error al crear la cuenta ❌");
+      alert("Error al crear la cuenta ");
     }
   };
 
