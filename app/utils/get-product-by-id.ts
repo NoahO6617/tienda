@@ -1,6 +1,10 @@
-import { apiFetch } from "./api";
-import { Product } from "../types/product";
+export async function getProductById(id: string) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/products/${id}`,
+    { cache: "no-store" }
+  );
 
-export function getProductById(id: string) {
-  return apiFetch<Product>(`/products/${id}`);
+  if (!res.ok) return null;
+
+  return res.json();
 }
