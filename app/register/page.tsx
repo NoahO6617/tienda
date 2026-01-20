@@ -4,27 +4,38 @@ import { useState } from "react";
 import { CreateUser } from "@/app/types/user";
 
 export default function RegisterPage() {
-  const [form, setForm] = useState<CreateUser>({
-    name: "",
+  const [form, setForm] = useState({
     email: "",
     password: "",
-  });
+  });  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-
-    alert("Cuenta creada correctamente ✅");
+  
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/users`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        }
+      );
+  
+      if (!res.ok) {
+        throw new Error("Error al crear usuario");
+      }
+  
+      alert("Cuenta creada correctamente ");
+    } catch (error) {
+      console.error(error);
+      alert("Error al crear la cuenta ");
+    }
   };
+  
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -35,15 +46,6 @@ export default function RegisterPage() {
         <h1 className="text-2xl font-bold mb-6 text-center">
           Crear cuenta
         </h1>
-
-        <input
-          name="name"
-          placeholder="Nombre"
-          onChange={handleChange}
-          required
-          className="w-full mb-4 p-2 border rounded"
-        />
-
         <input
           type="email"
           name="email"
