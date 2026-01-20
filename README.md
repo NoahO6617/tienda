@@ -5,4 +5,4 @@ https://tiendafrontejercicio.vercel.app
 
 El frontend utiliza la siguiente variable de entorno:
 
-NEXT_PUBLIC_API_URL=https://tu-backend.onrender.com
+NEXT_PUBLIC_API_URL=https://storeapi-ku4n.onrender.com
